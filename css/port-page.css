@@ -1,0 +1,222 @@
+/* ========== СТРАНИЦА ПОРТА ========== */
+
+.port-container {
+    max-width: 600px;
+}
+
+.port-content {
+    padding: 10px 0;
+}
+
+.ship-status {
+    background: linear-gradient(135deg, #1a2a3a, #0d1f2d);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.status-item {
+    text-align: center;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.status-label {
+    font-size: 0.75rem;
+    color: #aaa;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.status-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4afc4a;
+}
+
+.status-value.cash {
+    color: #ffd700;
+}
+
+.status-value.crystals {
+    color: #e91e63;
+}
+
+.status-value.contraband {
+    color: #ff6b6b;
+}
+
+.status-unit {
+    font-size: 0.7rem;
+    color: #888;
+    margin-left: 3px;
+}
+
+.port-info {
+    background: rgba(0,0,0,0.05);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.info-text {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0;
+}
+
+.port-services {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.service-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 12px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+}
+
+.service-icon {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.service-title {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #0d4f6e;
+    margin-bottom: 5px;
+}
+
+.service-desc {
+    font-size: 0.65rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.service-price {
+    font-size: 0.65rem;
+    color: #27ae60;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.service-warning {
+    font-size: 0.55rem;
+    color: #f39c12;
+    margin-bottom: 8px;
+}
+
+.service-btn {
+    width: 100%;
+    padding: 6px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.service-btn:hover {
+    transform: scale(1.02);
+}
+
+.service-btn:active {
+    transform: scale(0.98);
+}
+
+.fuel-btn {
+    background: #2196f3;
+    color: white;
+}
+
+.fuel-btn:hover {
+    background: #1976d2;
+}
+
+.crystal-btn {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    color: white;
+}
+
+.crystal-btn:hover {
+    background: linear-gradient(135deg, #c2185b, #880e4f);
+}
+
+.contraband-btn {
+    background: #ff9800;
+    color: white;
+}
+
+.contraband-btn:hover {
+    background: #f57c00;
+}
+
+.tavern-btn {
+    background: #9c27b0;
+    color: white;
+}
+
+.tavern-btn:hover {
+    background: #7b1fa2;
+}
+
+.port-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.port-exit-btn {
+    background: linear-gradient(135deg, #1a7fa8, #0d4f6e);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 200px;
+}
+
+.port-exit-btn:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, #2196f3, #0d5a7c);
+}
+
+@media (max-width: 650px) {
+    .port-services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .status-value {
+        font-size: 1.2rem;
+    }
+    
+    .status-item {
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .port-services {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
