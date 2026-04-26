@@ -1,0 +1,86 @@
+/* ========== COMMON STYLES ========== */
+
+* {
+    user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a2a3b 0%, #1a5a7a 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* ========== МНОГОСТРАНИЧНОСТЬ ========== */
+.page {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 5px;
+    color: #0d4f6e;
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+/* ========== ЦВЕТА ========== */
+.red-text { color: #e74c3c; font-weight: bold; }
+.green-text { color: #27ae60; font-weight: bold; }
+.yellow-text { color: #f39c12; font-weight: bold; }
+.blue-text { color: #2980b9; font-weight: bold; }
+
+.bonus-text { color: #27ae60; font-weight: bold; }
+.penalty-text { color: #e74c3c; font-weight: bold; }
+
+/* ========== АДАПТИВ ========== */
+@media (max-width: 650px) {
+    .game-container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.4rem;
+    }
+    
+    .subtitle {
+        font-size: 0.7rem;
+    }
+}

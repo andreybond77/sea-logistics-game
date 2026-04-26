@@ -1,0 +1,137 @@
+/* ========== СТАРТОВАЯ СТРАНИЦА ========== */
+
+.start-container {
+    text-align: center;
+}
+
+.game-logo {
+    background: linear-gradient(135deg, #1a7fa8 0%, #0d4f6e 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.logo-emoji {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.rules-full {
+    background: #e8f4f8;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.rules-full h2 {
+    color: #0d4f6e;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.rules-full p.rules-intro {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-weight: 500;
+    text-align: center;
+}
+
+.rules-section {
+    margin-bottom: 15px;
+}
+
+.rules-title {
+    font-weight: bold;
+    color: #1a5a7a;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.rules-full ul {
+    margin: 0 0 8px 0;
+    padding-left: 20px;
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+.rules-full li {
+    margin-bottom: 5px;
+}
+
+.rules-full .rules-section p {
+    margin: 5px 0 0 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.rules-footer {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #1a7fa8;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.start-game-btn {
+    background: linear-gradient(135deg, #1a7fa8, #0d5a7c);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+.start-game-btn:hover {
+    background: linear-gradient(135deg, #2196f3, #0d4f6e);
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.start-game-btn:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 650px) {
+    .rules-full ul {
+        font-size: 0.7rem;
+        padding-left: 15px;
+    }
+    
+    .rules-full p.rules-intro {
+        font-size: 0.8rem;
+    }
+    
+    .rules-footer {
+        font-size: 0.85rem;
+    }
+    
+    .game-logo {
+        padding: 20px;
+    }
+    
+    .logo-emoji {
+        font-size: 3rem;
+    }
+    
+    .logo-text {
+        font-size: 1rem;
+    }
+}

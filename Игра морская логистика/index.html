@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Морская логистика — сортировка грузов</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/start-page.css">
+    <link rel="stylesheet" href="css/game-page.css">
+    <link rel="stylesheet" href="css/stats-page.css">
+    <link rel="stylesheet" href="css/port-page.css">
+</head>
+<body>
+    <!-- СТРАНИЦА 1: СТАРТОВАЯ -->
+    <div id="startPage" class="page active">
+        <div class="game-container start-container">
+            <h1>⚓ МОРСКАЯ ЛОГИСТИКА</h1>
+            <p class="subtitle">Сортировка грузов по портам назначения</p>
+            
+            <div class="game-logo">
+                <div class="logo-emoji">🚢</div>
+                <div class="logo-text">Портовый погрузчик</div>
+            </div>
+            
+            <div class="rules-full">
+                <h2>📜 Правила морского плавания</h2>
+                <p class="rules-intro">На море, как всегда, шторм и ветер. Но ты — опытный морской волк и сумеешь пройти сквозь туман, обойти айсберги и рифы, не сядешь на мель, перехитришь портовых таможенников и заработать монеты на ром!</p>
+                
+                <div class="rules-section">
+                    <div class="rules-title">🎯 Порты назначения по углам карты:</div>
+                    <ul>
+                        <li><span class="red-text">🔴 Тортуга</span> — северо-западная часть карты (клетки входа: 3,2 и 2,3)</li>
+                        <li><span class="green-text">🟢 Бриджтаун</span> — северо-восточная часть карты (клетки входа: 3,8 и 2,7)</li>
+                        <li><span class="yellow-text">🟡 Кингстон</span> — юго-западная часть карты (клетки входа: 5,2 и 6,3)</li>
+                        <li><span class="blue-text">🔵 Кастри</span> — юго-восточная часть карты (клетки входа: 5,8 и 6,7)</li>
+                    </ul>
+                </div>
+                
+                <div class="rules-section">
+                    <div class="rules-title">📦 Контрабанда и легальная торговля:</div>
+                    <ul>
+                        <li><span class="red-text">🔴 Тортуга</span>: контрабанда — 🔵 синие кристаллы; легальные — 🔴 красные 🟢 зелёные 🟡 жёлтые</li>
+                        <li><span class="green-text">🟢 Бриджтаун</span>: контрабанда — 🔴 красные кристаллы; легальные — 🟢 зелёные 🔵 синие 🟡 жёлтые</li>
+                        <li><span class="yellow-text">🟡 Кингстон</span>: только законная торговля 🟡 жёлтыми кристаллами (30 монет)</li>
+                        <li><span class="blue-text">🔵 Кастри</span>: контрабанда — 🟢 зелёные кристаллы; легальные — 🔴 красные 🔵 синие 🟡 жёлтые</li>
+                    </ul>
+                    <p>Контрабанда продаётся за 60 монет (50% риск штрафа 30 монет). Легальные кристаллы — 30 монет безопасно.</p>
+                </div>
+                
+                <div class="rules-section">
+                    <div class="rules-title">💰 Награды за доставку:</div>
+                    <ul>
+                        <li>За каждый контейнер в свой порт — <span class="bonus-text">+30</span> монет + кристалл</li>
+                        <li>За полную загрузку порта (5 контейнеров) — <span class="bonus-text">+100</span> монет</li>
+                        <li>За загрузку всех портов — <span class="bonus-text">+1000</span> монет</li>
+                    </ul>
+                </div>
+                
+                <div class="rules-section">
+                    <div class="rules-title">⚠️ Расходы и штрафы:</div>
+                    <ul>
+                        <li>За каждое движение — <span class="penalty-text">-1</span> монета, <span class="penalty-text">-1</span> топливо</li>
+                        <li>Столкновение с айсбергом/скалой — <span class="penalty-text">-5</span> монет</li>
+                        <li>Столкновение с портом — <span class="penalty-text">-10</span> монет</li>
+                    </ul>
+                </div>
+                
+                <div class="rules-footer">⚓ Поднять якоря! Работа не ждёт!</div>
+            </div>
+            
+            <button class="start-game-btn" id="startGameBtn">🚢 НАЧАТЬ ПЛАВАНИЕ</button>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 2: ИГРОВАЯ -->
+    <div id="gamePage" class="page">
+        <div class="game-container">
+            <h1>⚓ МОРСКАЯ ЛОГИСТИКА</h1>
+
+            <div class="warehouse" id="warehouse"></div>
+
+            <div class="game-controls">
+                <div class="info-screen" id="infoScreen">
+                    <div class="info-message success" id="infoMessage">
+                        🚢 Добро пожаловать на борт!
+                    </div>
+                </div>
+
+                <div class="control-grid">
+                    <div class="grid-cell stat-cell">
+                        <span class="stat-label">⚠️ ШТРАФЫ:</span>
+                        <span class="stat-value" id="penaltyCount">0</span>
+                    </div>
+                    <div class="grid-cell">
+                        <button class="control-btn up-btn" id="moveUpBtn">⬆️</button>
+                    </div>
+                    <div class="grid-cell stat-cell">
+                        <span class="stat-label">🎁 БОНУСЫ:</span>
+                        <span class="stat-value" id="bonusCount">0</span>
+                    </div>
+                    <div class="grid-cell cash-cell">
+                        <span class="cash-label">💰 КАЗНА:</span>
+                        <span class="cash-value" id="cashValue">0</span>
+                    </div>
+
+                    <div class="grid-cell">
+                        <button class="control-btn left-btn" id="moveLeftBtn">⬅️</button>
+                    </div>
+                    <div class="grid-cell">
+                        <button class="control-btn reset-btn" id="resetGameBtn">🔄</button>
+                    </div>
+                    <div class="grid-cell">
+                        <button class="control-btn right-btn" id="moveRightBtn">➡️</button>
+                    </div>
+                    <div class="grid-cell step-cell">
+                        <span class="stat-label">🚶 ДВИЖЕНИЯ:</span>
+                        <span class="stat-value" id="stepValue">0</span>
+                    </div>
+
+                    <div class="grid-cell">
+                        <button class="corner-btn deposit-corner" id="depositBtn">🏴‍☠️ ПОРТ</button>
+                    </div>
+                    <div class="grid-cell">
+                        <button class="control-btn down-btn" id="moveDownBtn">⬇️</button>
+                    </div>
+                    <div class="grid-cell">
+                        <button class="corner-btn withdraw-corner" id="withdrawBtn">📊 ЖУРНАЛ</button>
+                    </div>
+                    <div class="grid-cell">
+                        <button class="corner-btn exit-corner" id="exitBtn">🚪 ВЫХОД</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 3: СТАТИСТИЧЕСКАЯ -->
+    <div id="statsPage" class="page">
+        <div class="game-container stats-container">
+            <h1>📊 БОРТОВОЙ ЖУРНАЛ</h1>
+            
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <div class="stats-card-title">📈 ОБЩАЯ СТАТИСТИКА</div>
+                    <div class="stats-item">
+                        <span class="stats-label">🚶 Всего движений:</span>
+                        <span class="stats-value" id="totalSteps">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">⚠️ Всего штрафов:</span>
+                        <span class="stats-value penalty" id="totalPenalties">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">🎁 Всего бонусов:</span>
+                        <span class="stats-value bonus" id="totalBonuses">0</span>
+                    </div>
+                    <div class="stats-item highlight">
+                        <span class="stats-label">💰 Эффективность:</span>
+                        <span class="stats-value" id="efficiency">0%</span>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-card-title">💰 ФИНАНСЫ</div>
+                    <div class="stats-item">
+                        <span class="stats-label">💵 Вложено в казну:</span>
+                        <span class="stats-value" id="totalDeposits">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">📈 Заработано доставкой:</span>
+                        <span class="stats-value profit" id="totalProfit">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">💸 Штрафы (расходы):</span>
+                        <span class="stats-value penalty" id="totalMoneyPenalties">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">🏦 Итоговый баланс:</span>
+                        <span class="stats-value" id="finalBalance">0</span>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-card-title">🎯 ДОСТАВЛЕНО КОНТЕЙНЕРОВ</div>
+                    <div class="stats-item">
+                        <span class="stats-label red-text">🔴 Тортуга:</span>
+                        <span class="stats-value" id="redBoxesCollected">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label green-text">🟢 Бриджтаун:</span>
+                        <span class="stats-value" id="greenBoxesCollected">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label yellow-text">🟡 Кингстон:</span>
+                        <span class="stats-value" id="yellowBoxesCollected">0</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label blue-text">🔵 Кастри:</span>
+                        <span class="stats-value" id="blueBoxesCollected">0</span>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-card-title">🏆 МОРСКИЕ ДОСТИЖЕНИЯ</div>
+                    <div class="stats-achievement locked" id="achievePerfect">
+                        <span class="achievement-icon">⭐</span>
+                        <span>Идеальное плавание (без штрафов)</span>
+                    </div>
+                    <div class="stats-achievement locked" id="achieveCollector">
+                        <span class="achievement-icon">🏆</span>
+                        <span>Лоцман (все порты загружены)</span>
+                    </div>
+                    <div class="stats-achievement locked" id="achieveMillionaire">
+                        <span class="achievement-icon">💎</span>
+                        <span>Корабельный магнат (1000+ баланс)</span>
+                    </div>
+                    <div class="stats-achievement locked" id="achieveSpeed">
+                        <span class="achievement-icon">⚡</span>
+                        <span>Быстрый фрегат (менее 50 ходов)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-buttons">
+                <button class="stats-back-btn" id="statsBackBtn">🎮 ПРОДОЛЖИТЬ РЕЙС</button>
+                <button class="stats-menu-btn" id="statsMenuBtn">🏠 ГЛАВНЫЙ ПОРТ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 4: ПОРТ -->
+    <div id="portPage" class="page">
+        <div class="game-container port-container">
+            <h1>🏴‍☠️ ПОРТ</h1>
+            <p class="subtitle" id="portName">Добро пожаловать в порт!</p>
+            
+            <div class="port-content">
+                <div class="ship-status">
+                    <div class="status-item">
+                        <span class="status-label">⛽ ТОПЛИВО:</span>
+                        <span class="status-value" id="fuelAmount">100</span>
+                        <span class="status-unit">/ 100</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">💰 КАЗНА:</span>
+                        <span class="status-value cash" id="portCash">0</span>
+                        <span class="status-unit">монет</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label" id="crystalsLabel">💎 КРИСТАЛЛЫ:</span>
+                        <span class="status-value crystals" id="crystalsAmount">0</span>
+                        <span class="status-unit">шт.</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">📦 КОНТРАБАНДА:</span>
+                        <span class="status-value contraband" id="contrabandAmount">0</span>
+                        <span class="status-unit">ед.</span>
+                    </div>
+                </div>
+
+                <div class="port-info">
+                    <p id="contrabandInfo" class="info-text"></p>
+                </div>
+
+                <div class="port-services">
+                    <div class="service-card">
+                        <div class="service-icon">⛽</div>
+                        <div class="service-title">ЗАПРАВКА</div>
+                        <div class="service-desc">Пополнить запасы топлива</div>
+                        <div class="service-price">20 монет = +20 топлива</div>
+                        <div class="service-warning">⚠️ Максимум 100 ед.</div>
+                        <button class="service-btn fuel-btn" id="refuelBtn">ЗАПРАВИТЬСЯ</button>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">💎</div>
+                        <div class="service-title">ЛЕГАЛЬНАЯ ТОРГОВЛЯ</div>
+                        <div class="service-desc">Продать легальные кристаллы</div>
+                        <div class="service-price">1 кристалл = 30 монет</div>
+                        <div class="service-warning">✅ Безопасная сделка</div>
+                        <button class="service-btn crystal-btn" id="sellCrystalsBtn">ПРОДАТЬ КРИСТАЛЛЫ</button>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">📦</div>
+                        <div class="service-title">КОНТРАБАНДА</div>
+                        <div class="service-desc">Продать контрабанду</div>
+                        <div class="service-price">1 ед. = 60 монет</div>
+                        <div class="service-warning">⚠️ 50% риск штрафа 30 монет</div>
+                        <button class="service-btn contraband-btn" id="sellContrabandBtn">ПРОДАТЬ КОНТРАБАНДУ</button>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🍺</div>
+                        <div class="service-title">КАБАК</div>
+                        <div class="service-desc">Поднять дух команды</div>
+                        <div class="service-price">10 монет = +5 бонусов</div>
+                        <div class="service-warning">🍻 + контрабанда</div>
+                        <button class="service-btn tavern-btn" id="tavernBtn">ЗАЙТИ В КАБАК</button>
+                    </div>
+                </div>
+
+                <div class="port-buttons">
+                    <button class="port-exit-btn" id="exitPortBtn">⚓ ВЫЙТИ В МОРЕ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/utils.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/port-logic.js"></script>
+    <script src="js/game-logic.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
